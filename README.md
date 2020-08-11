@@ -1,3 +1,3 @@
-# Truck-App
+# World-App
 
-Truck App thing for some hackathon
+World App thing for some hackathon
