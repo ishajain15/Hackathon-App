@@ -1,3 +1,3 @@
-# World-App
+# Hackathon-App
 
-World App thing for some hackathon
+App for devops hackathon
