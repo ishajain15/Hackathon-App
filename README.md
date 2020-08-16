@@ -13,3 +13,5 @@ INSTRUCTIONS TO RUN THIS PROJECT ON VSCODE:
 3. TYPE "npm install expo"
 
 4. TO RUN THE APP, TYPE "expo start"
+
+5. TO STOP "expo start", PRESS CTRL + C
