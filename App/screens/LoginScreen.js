@@ -104,12 +104,12 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   image: {
-    height: 20,
-    width: 20,
+    height: 18,
+    width: 18,
   },
   text: {
     textAlign: "center",
-    paddingLeft: 10,
+    paddingLeft: 6,
     fontSize: 20,
     color: "#475BD6",
     fontFamily: "Inter-Black",
