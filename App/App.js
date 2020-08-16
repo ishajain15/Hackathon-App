@@ -7,8 +7,10 @@ import LoadingScreen from "./screens/LoadingScreen";
 import DashboardScreen from "./screens/DashboardScreen";
 
 import firebase from "firebase";
-console.log(firebase.name);
-console.log(firebase.database());
+import { firebaseConfig } from "./config";
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 export default class App extends Component {
   render() {
