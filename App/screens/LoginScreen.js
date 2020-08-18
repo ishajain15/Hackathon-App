@@ -88,15 +88,11 @@ export default LoginScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
   },
   linearGradient: {
     alignItems: "center",
     justifyContent: "center",
-    borderRadius: 0,
-    height: 1000,
-    width: 450,
+    flex: 1,
   },
   button: {
     backgroundColor: "#fff",
