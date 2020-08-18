@@ -93,15 +93,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1
-<<<<<<< HEAD
-    //flex is a way to create elements that will magically fill a certain space without you dealing with the mechanics
-<<<<<<< HEAD
-   // unnati's comment &
-=======
-    //bitch wtf
->>>>>>> 3c2c99097efdb31967bb49181c0262db48fdb5b4
-=======
->>>>>>> 5f65dc3c598f16cf30b88310392cb96452d91859
   },
   button: {
     backgroundColor: "#fff",
