@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     height: 18,
     width: 18,
   },
+  //ISHA
   text: {
     textAlign: "center",
     paddingLeft: 6,
