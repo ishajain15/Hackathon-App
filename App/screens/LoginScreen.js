@@ -5,7 +5,7 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image,
+  Image
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
@@ -13,12 +13,12 @@ import * as Google from "expo-google-app-auth";
 import * as Font from "expo-font";
 
 let customFonts = {
-  "Inter-Black": require("../assets/fonts/Inter-Black.ttf"),
+  "Inter-Black": require("../assets/fonts/Inter-Black.ttf")
 };
 
 class LoginScreen extends Component {
   state = {
-    fontsLoaded: false,
+    fontsLoaded: false
   };
 
   signInWithGoogleAsync = async () => {
@@ -28,7 +28,7 @@ class LoginScreen extends Component {
         behavior: "web",
         iosClientId:
           "730876437748-n4o4s2jcc1rqrmvlvd6kc9pf0bh8j8h4.apps.googleusercontent.com",
-        scopes: ["profile", "email"],
+        scopes: ["profile", "email"]
       });
 
       if (result.type === "success") {
@@ -87,21 +87,22 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flex: 1
   },
   linearGradient: {
     alignItems: "center",
     justifyContent: "center",
-    flex: 1,
+    flex: 1
+    //flex is a way to create elements that will magically fill a certain space without you dealing with the mechanics
   },
   button: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    padding: 10,
+    padding: 10
   },
   image: {
     height: 18,
-    width: 18,
+    width: 18
   },
 
   text: {
@@ -110,6 +111,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#475BD6",
     fontFamily: "Inter-Black",
-    lineHeight: 24,
-  },
+    lineHeight: 24
+  }
 });
