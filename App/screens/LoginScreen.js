@@ -5,20 +5,86 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image
+  Image,
 } from "react-native";
+import firebase from "firebase";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import * as Google from "expo-google-app-auth";
 import * as Font from "expo-font";
 
 let customFonts = {
-  "Inter-Black": require("../assets/fonts/Inter-Black.ttf")
+  "Inter-Black": require("../assets/fonts/Inter-Black.ttf"),
 };
 
 class LoginScreen extends Component {
+  isUserEqual = (googleUser, firebaseUser) => {
+    if (firebaseUser) {
+      var providerData = firebaseUser.providerData;
+      for (var i = 0; i < providerData.length; i++) {
+        if (
+          providerData[i].providerId ===
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+          providerData[i].uid === googleUser.getBasicProfile().getId()
+        ) {
+          // We don't need to reauth the Firebase connection.
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  onSignIn = (googleUser) => {
+    console.log("Google Auth Response", googleUser);
+    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+    var unsubscribe = firebase.auth().onAuthStateChanged(
+      function (firebaseUser) {
+        unsubscribe();
+        // Check if we are already signed-in Firebase with the correct user.
+        if (!this.isUserEqual(googleUser, firebaseUser)) {
+          // Build Firebase credential with the Google ID token.
+          var credential = firebase.auth.GoogleAuthProvider.credential(
+            googleUser.idToken,
+            googleUser.accesToken
+          );
+          // Sign in with credential from the Google user.
+          firebase
+            .auth()
+            .signInWithCredential(credential)
+            .then(function (result) {
+              console.log("user signed in");
+              firebase
+                .database()
+                .ref("/users/" + result.user.uid)
+                .set({
+                  gmail: result.user.email,
+                  profile_picture: result.additionalUserInfo.profile.picture,
+                  locale: result.additionalUserInfo.profile.locale,
+                  first_name: result.additionalUserInfo.profile.given_name,
+                  last_name: result.additionalUserInfo.profile.family_name,
+                });
+              //.then(function (snapshot) {
+              //console.log('Snapshot', snapshot);
+              // )};
+            })
+            .catch(function (error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // The email of the user's account used.
+              var email = error.email;
+              // The firebase.auth.AuthCredential type that was used.
+              var credential = error.credential;
+              // ...
+            });
+        } else {
+          console.log("User already signed-in Firebase.");
+        }
+      }.bind(this)
+    );
+  };
   state = {
-    fontsLoaded: false
+    fontsLoaded: false,
   };
 
   signInWithGoogleAsync = async () => {
@@ -28,10 +94,11 @@ class LoginScreen extends Component {
         behavior: "web",
         iosClientId:
           "730876437748-n4o4s2jcc1rqrmvlvd6kc9pf0bh8j8h4.apps.googleusercontent.com",
-        scopes: ["profile", "email"]
+        scopes: ["profile", "email"],
       });
 
       if (result.type === "success") {
+        this.onSignIn(result);
         return result.accessToken;
       } else {
         return { cancelled: true };
@@ -87,21 +154,21 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
   },
   linearGradient: {
     alignItems: "center",
     justifyContent: "center",
-    flex: 1
+    flex: 1,
   },
   button: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    padding: 10
+    padding: 10,
   },
   image: {
     height: 18,
-    width: 18
+    width: 18,
   },
 
   text: {
@@ -110,6 +177,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#475BD6",
     fontFamily: "Inter-Black",
-    lineHeight: 24
-  }
+    lineHeight: 24,
+  },
 });
