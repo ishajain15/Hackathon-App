@@ -5,12 +5,16 @@ import {
   View,
   Button,
   TouchableOpacity,
-  Image
+  Image,
+  Dimensions
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import * as Google from "expo-google-app-auth";
 import * as Font from "expo-font";
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
 
 let customFonts = {
   "Inter-Black": require("../assets/fonts/Inter-Black.ttf")
@@ -57,10 +61,13 @@ class LoginScreen extends Component {
           <LinearGradient
             colors={["white", "rgb(149, 156, 241)"]}
             style={styles.linearGradient}
-            start={{ x: 0.5, y: 0 }}
-            end={{ x: 0.5, y: 0.5 }}
+            start={{ x: 1, y: 0 }}
+            end={{ x: 1, y: 0.4 }}
           >
-            <Text>hi my name is unnati</Text>
+            <Image
+              style={styles.backgroundImage}
+              source={require("../assets/loginscreen.png")}
+            />
             <TouchableOpacity
               style={styles.button}
               onPress={() => this.signInWithGoogleAsync()}
@@ -87,7 +94,9 @@ export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    justifyContent: "flex-end",
+    marginBottom: 0
   },
   linearGradient: {
     alignItems: "center",
@@ -97,7 +106,8 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#fff",
     borderRadius: 10,
-    padding: 10
+    padding: 7,
+    marginBottom: -46
   },
   image: {
     height: 18,
@@ -107,9 +117,16 @@ const styles = StyleSheet.create({
   text: {
     textAlign: "center",
     paddingLeft: 6,
-    fontSize: 20,
+    fontSize: 15,
     color: "#475BD6",
     fontFamily: "Inter-Black",
     lineHeight: 24
+  },
+
+  backgroundImage: {
+    height: windowHeight,
+    width: windowWidth,
+    position: "absolute",
+    bottom: 0
   }
 });
