@@ -62,10 +62,10 @@ class LoginScreen extends Component {
                   locale: result.additionalUserInfo.profile.locale,
                   first_name: result.additionalUserInfo.profile.given_name,
                   last_name: result.additionalUserInfo.profile.family_name,
+                })
+                .then(function (snapshot) {
+                  //console.log('Snapshot', snapshot);
                 });
-              //.then(function (snapshot) {
-              //console.log('Snapshot', snapshot);
-              // )};
             })
             .catch(function (error) {
               // Handle Errors here.
