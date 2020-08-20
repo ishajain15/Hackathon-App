@@ -1,9 +1,16 @@
 import React, { Component } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, Picker } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { Picker } from "@react-native-community/picker";
+//import { Picker } from "@react-native-community/picker";
+import DropDownPicker from "react-native-dropdown-picker";
+
 class DashboardScreen extends Component {
   render() {
+    this.state = {
+      country: null,
+      pickerSelection: "java",
+    };
+
     //if (this.state.fontsLoaded) {
     return (
       <View style={styles.container}>
@@ -13,16 +20,31 @@ class DashboardScreen extends Component {
           start={{ x: 0.5, y: 0 }}
           end={{ x: 0.5, y: 0.5 }}
         >
-          <Picker
-            //selectedValue={this.state.language}
-            style={{ height: 50, width: 100 }}
-            onValueChange={(itemValue, itemIndex) =>
-              this.setState({ language: itemValue })
+          <DropDownPicker
+            items={[
+              { label: "CST" },
+              { label: "EST" },
+              { label: "PST" },
+              { label: "MDT" },
+              { label: "IST" },
+              { label: "GMT" },
+            ]}
+            defaultValue={this.state.country}
+            containerStyle={{ height: 50, width: 250 }}
+            style={{ backgroundColor: "#fafafa" }}
+            itemStyle={{ justifyContent: "flex" }}
+            dropDownStyle={{ backgroundColor: "#fafafa" }}
+            dropDownMaxHeight={1000}
+            searchable={true}
+            searchablePlaceholder="Search for a time zone"
+            placeholder="Please select a time zone!"
+            placeholderStyle={{ fontWeight: "bold" }}
+            onChangeItem={(item) =>
+              this.setState({
+                country: item.value,
+              })
             }
-          >
-            <Picker.Item label="Java" value="java" />
-            <Picker.Item label="JavaScript" value="js" />
-          </Picker>
+          />
         </LinearGradient>
       </View>
     );
