@@ -12,7 +12,7 @@ class LoadingScreen extends Component {
       function (user) {
         if (user) {
           this.props.navigation.navigate("DashboardScreen");
-          //user.providerData.forEach(function (profile) {
+           //user.providerData.forEach(function (profile) {
            // console.log("Sign-in provider: " + profile.providerId);
           //  console.log("  Provider-specific UID: " + profile.uid);
           //  console.log("  Name: " + profile.displayName);
