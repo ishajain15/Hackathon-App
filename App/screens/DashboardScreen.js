@@ -7,8 +7,8 @@ import DropDownPicker from "react-native-dropdown-picker";
 class DashboardScreen extends Component {
   render() {
     this.state = {
+      choice: "aldskfja;sdlfj",
       country: null,
-      pickerSelection: "java",
     };
 
     //if (this.state.fontsLoaded) {
@@ -22,12 +22,12 @@ class DashboardScreen extends Component {
         >
           <DropDownPicker
             items={[
-              { label: "CST" },
-              { label: "EST" },
-              { label: "PST" },
-              { label: "MDT" },
-              { label: "IST" },
-              { label: "GMT" },
+              { label: "CST", value: "central" },
+              { label: "EST", value: "eastern" },
+              { label: "PST", value: "pacific" },
+              { label: "MDT", value: "mountain" },
+              { label: "IST", value: "indian" },
+              { label: "GMT", value: "greenwich median" },
             ]}
             defaultValue={this.state.country}
             containerStyle={{ height: 50, width: 250 }}
@@ -39,11 +39,7 @@ class DashboardScreen extends Component {
             searchablePlaceholder="Search for a time zone"
             placeholder="Please select a time zone!"
             placeholderStyle={{ fontWeight: "bold" }}
-            onChangeItem={(item) =>
-              this.setState({
-                country: item.value,
-              })
-            }
+            onChangeItem={(item) => console.log(item.label, item.value)}
           />
         </LinearGradient>
       </View>
