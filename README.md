@@ -12,8 +12,6 @@ INSTRUCTIONS TO RUN THIS PROJECT ON VSCODE:
 
 3. TYPE "npm install expo"
 
-4. TYPE "expo install react-native-dropdown-picker"
+4. TO RUN THE APP, TYPE "expo start"
 
-5. TO RUN THE APP, TYPE "expo start"
-
-6. TO STOP "expo start", PRESS CTRL + C
+5. TO STOP "expo start", PRESS CTRL + C
